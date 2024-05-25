@@ -1,0 +1,8 @@
+---
+# tasks file for open-jdk
+- name: insatll java on ubuntu
+  become: true
+  apt:
+    name: openjdk-17-jdk
+    state: present    
+    update_cache: yes

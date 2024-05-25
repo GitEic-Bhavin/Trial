@@ -1,0 +1,66 @@
+				EC2 Instance status checks 				07/04/2024
+				
+when you start ec2, firstly, you will see the staturs of ec2 is like a 2/2 is passed status.
+
+this is identify the issues of hardware & software side.
+
+if no issues found from hardware & software side then, 
+                                                        2/2 passed process
+this will you see.
+
+this process is automatically check by aws.
+
+THERE ARE 2 TYPES OF PROCESS.
+  
+  1. System status check.
+     
+     This will check whhat is the problem like software of hardware is not running ? 
+     Physical host is down ?from aws side ?
+     Is power lost which cause to breakdown entire system includes, host machine, data-center etc. ?
+     
+     
+     BEFORE YOUR SERVER IS GO-DOWN BCZ, OF AWS SERIVECE MAINTANANCE FOR ABOVE REASON, YOU WILL GET NOTIFICATIOIN IN ADVANCE FROM "AWS HEALTH" SERVICE.
+     
+     so, you will not affect your work.
+     
+     
+                                                            
+REMEDIES.
+
+if your ec2 is not passed 2/2 process. or your ec2 is failure bcz of aws side.
+
+stop - start - ec2 instance.
+you will get a new host machine beside of aws.
+you will get a diff new public ip.
+
+
+
+Process 2.
+instance status check.
+
+IT'S MONITOR THE SOFTWARE/NETWORK CONFIGURATION FOR YOUR INSTANCE.
+issues like a exhausted memory, invalid network configuration from aws.
+
+REMIDIES is same - restart your ec2 instance. and chnage the instance configuration.
+
+
+
+
+
+
+				HERE COMES CLOUDWATCH METRICS
+				
+	OPTION 1			USE CLOUDWATCH ALERM TO RECOVER YOUR EC2 INSTANCES WITH SAME PUBLIC/PRIVATE IP,
+				SAME PLACEMENT GROUP, EIP, METADATA.
+				to recover ec2, select action:recover
+				
+				ec2 instance is monitored by cloudwatch metrix.
+				once ec2, status check fail,
+				cloudwatch alerm will triggered,
+				recover your instance with same public/private IP, EBS, Placement group, metadata.
+				
+	OPTION 2               USE AUTO-SCALING GROUP,
+	  			BUT IT WILL NOT RECOVER YOUR SAME PUBLIC/PRIVATE IP, EBS, PLACEMENT GROUP, METADATA ETC.
+	  			
+	  			IT WILL TERMINATE YOUR EXISTING EC2 & ASSIGN A NEW EC2, IF YOUR EC2 IS FAIL.
+	  		

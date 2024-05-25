@@ -1,0 +1,27 @@
+---
+# tasks file for sonarqube
+- name: install zip
+  apt: name=zip state=present
+
+- name: Download Sonarqube zip file from given link
+  get_url:
+    url: "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.0.0.68432.zip"
+    dest: "/home/ubuntu/sonarqube-10.0.0.68432.zip"
+
+- name: create directory /opt/sonarqube/
+  file:
+    path: "/opt/sonarqube"
+    state: directory
+
+
+- name: Unzip SonarQube zip file
+  ansible.builtin.unarchive:
+    src: "/home/ubuntu/sonarqube-10.0.0.68432.zip"
+    dest: "/opt/sonarqube/"
+    creates: "/opt/sonarqube"
+    
+  become: true
+
+- name: Rename unzip directory
+  become: true
+  command: mv /home/ubuntu/sonarqube-10.0.0.68432 sonarqube

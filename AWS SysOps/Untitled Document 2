@@ -1,0 +1,22 @@
+				Cloudwatch Metrics for EC2 				06/03/2024
+				
+AWS Provides Metrics service, so you can monitor all the metrics for ec2 like vcpus-utilization, vcpus credits means in ec2 console page , select ec2, then click on monitor.
+
+you will see all graph. this graph is metrics.
+you can see here, how much vcpus was runnig at how much vcpus utilization for 5 minutes, a minutes etc.
+
+ex. at a strik, cpu is utilized at 50% for 8 minutes.
+
+All this data will go to S3 Bucket by cloudwatch.
+
+
+
+
+
+NOTE- AWS DOES NOT PUSH EC2's RAM in ec2's metrics.
+
+
+
+for Bydefault , basic monitoring - metrics are collected at a 5 minutes interval.
+for PAID , Detailed monitoring - metrics are collected at a 1 minutes interval.
+This includes , CPU, NETWORK, DISK & STATUS CHECK Metircs.

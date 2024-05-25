@@ -1,0 +1,32 @@
+                                        Network Enhanced Adeptor                      06/03/2024
+                                        
+ENA - Enhanced Network Adeptor
+
+ENA is use for improving latency at CDN Level.
+
+ex. User is from USA, HOST is in INDIA.
+    CND is configured.
+if user is to trying to retrive the data. data will go through Multiple network.
+so time is required to receive the data like 5 sec.
+
+user want to get that data with few sec, 1 sec.
+
+so, you can provide data in few sec, using NETWORK ENHANCED ADEPTOR.
+
+This will provides Higher bandwidth of 100 GBPS. which will improve the latency at CDN Level.
+
+
+
+This ENA is Works for newer generation EC2 Instances, NOT for older ec2 instance.
+
+      t2.micro is older,         t3 is newer
+      driver is vif              drier is ena is in-buided.
+
+
+
+
+                                     Elastic Fabric Adapter (EFA)
+
+It is Improved version of ENA
+Use for HPC- High Performance Computing.
+Great for inter-node communications, tightly coupled workloads.

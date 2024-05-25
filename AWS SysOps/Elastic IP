@@ -1,0 +1,22 @@
+ 					Elastic IP				07/03/2024
+ 					
+When you launch ec2, you have public ip and private ip for that ec2.
+after restart ec2, public ip will changed & your ec2 will start on another physical host at backend of AWS.
+
+ex. Google.com have default public ip address 8.8.8.8
+
+you want to keep this public ip forever like your own ip.
+you have to assign a Elastic Ip to that ec2.
+
+You don’t pay for the Elastic IP if it’s attached to a server.
+
+You pay for the Elastic IP if it’s not attached to a server.
+
+• How you can avoid using Elastic IP:
+ 
+  • Always think if other alternatives are available to you
+  • You could use a random public IP and register a DNS name to it
+  • Or use a Load Balancer with a static hostname
+  
+NOTE:  With an Elastic IP address, you can mask the failure of an instance.
+ 					

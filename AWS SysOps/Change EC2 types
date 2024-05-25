@@ -1,0 +1,17 @@
+                            AWS Cerified SysOps Admistration              06/03/2024
+
+Change EC2 Instance Type. t2.micro to t2.small or in t3 version EC2.
+
+Why we need to change instance type?
+Bcz, for horizontal scaling (Auto Scaling) will adding or removing the ec2 as per traffic load.
+   
+ Auto scaling is supported only for  horizontal scaling.
+ 
+ for vertical scaling, we have to modify ec2 memory by following steps.
+ 
+ Step-1 Stop the instance & Right click on your ec2.
+ Step-2 Instance Settings => Change Instance Type
+ Step-3 Start Instance.
+ 
+ for,    increase your ec2 size t2.micro to t2.small
+         decrease your ec2 size t2.micro to t2.nano

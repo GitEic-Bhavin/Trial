@@ -1,0 +1,20 @@
+				Unified Cloudwatch Agent				07/03/2024
+				
+we can collect all log & metrics like aws services uses in ec2.
+you can also send log to cloudwatch logs.
+
+THIS AGENT WILL TAKE ALL METRICS & LOGS AUTOMETICALLY. WITH DETAILED INFO. LIKE MEMORY USAGE/FREE.
+
+To enable this service you have to give permission in IAM Policy.
+
+IF YOU WANT TO CONFIGURE YOUR UNIFIED CLOUDWATCH AGENT, THEN USE SSM PARAMETER STORE.
+
+
+
+
+
+You have a ec2 instance within unified cloudwatch agent, and you want to send the metrix to the cloudwatch. so , configure this agent with IAM permission.
+
+THIS IS USE FOR ON-PREMISE (CUSTOMERS'S DATA CENTERS ) & EC2 INSTANCES BOTH.
+YOU HAVE TO CONFIGURE THIS AGENT TO PUSH/SEND THE METRICS TO THE CLOUDWATH BY GIVING A PERFECT PERMISSIONS USING IAM.
+

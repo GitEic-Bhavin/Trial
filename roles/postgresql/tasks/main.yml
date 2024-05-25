@@ -1,0 +1,81 @@
+---
+# tasks file for postgresql
+- name: add postgresql repositroy on ubuntu
+  become: true
+  file:
+    path: /etc/apt/sources.list.d/
+    state: directory
+
+- name: Add Postgresql repository
+  become: True
+  command: "sh -c 'echo \"deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main\" > /etc/apt/sources.list.d/pgdg.list'"
+
+- name: add postgresql signing key on ubuntu
+  apt_key:
+    url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+    state: present
+
+- name: Install postgresql
+  apt:
+    name: postgresql-contrib
+    state: present
+
+- name: show version of postgresql
+  command: psql --version
+  register: result
+- debug:
+    var: result.stdout
+
+- name: Start Postgresql service
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+
+#- name: swich to the postgres user
+#  become: true
+# become_user: postgres
+#  command: "/bin/bash"
+
+#- name: Create user 'ddsonar'
+#  become: true
+#  become_user: postgres
+#  command: "createuser ddsonar"
+
+#- name: Set password for user 'ddsonar'
+#  become: true
+#  become_user: postgres
+#  postgresql_user:
+#    name: ddsonar
+#    encrypted: yes
+#    password: "mwd#2%#!!#%rgs"
+#    state: present
+
+- name: Create PostgreSQL user 'ddsonar' and set password
+  become: true
+  become_user: postgres
+  postgresql_user:
+    name: ddsonar
+    password: "mwd#2%#!!#%rgs"
+    encrypted: yes
+    state: present
+
+
+
+
+#    name: ddsonar
+
+
+#  postgresql_user:
+#    encrypted: yes
+#    password: "mwd#2%#!!#%rgs"
+#    state: present
+#  shell: \q
+#  shell: exit
+#  become_user: postgres
+
+#  postgresql_user:
+#    name: ddsonar
+#    encrypted: yes
+#    password: "mwd#2%#!!#%rgs"
+#    state: present
