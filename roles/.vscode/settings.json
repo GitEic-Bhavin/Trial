@@ -1,0 +1,6 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks": "file:///home/einfochips/Documents/roles/postgresql/tasks/main.yml"
+    },
+    "ansible.python.interpreterPath": "/bin/python3"
+}

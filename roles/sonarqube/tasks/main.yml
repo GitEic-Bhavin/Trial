@@ -1,0 +1,30 @@
+---
+# tasks file for sonarqube
+- name: install zip
+  apt: name=zip state=present
+
+- name: Download Sonarqube zip file from given link
+  get_url:
+    url: "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.0.0.68432.zip"
+    dest: "/home/ubuntu/sonarqube-10.0.0.68432.zip"
+
+# - name: create directory /opt/sonarqube/
+#   file:
+#     path: "/opt/sonarqube"
+#     state: directory
+
+
+- name: Unzip SonarQube zip file
+  unarchive:
+    src: "/home/ubuntu/sonarqube-10.0.0.68432.zip"
+    dest: "/home/ubuntu/" 
+    remote_src: yes
+    # creates: "/opt/sonarqube"
+    
+  become: true
+
+- name: rename unzip file to sonarqube
+  shell: mv sonarqube-10.0.0.68432 sonarqube
+ 
+- name: mv sonarqube to /opt/sonarqube
+  shell: mv sonarqube /opt/sonarqube
