@@ -1,2 +1,11 @@
----
 # handlers file for sonarqube
+- name: Enable Sonarqube service
+  service:
+    name: sonarqube
+    state: enabled
+
+- name: Start Sonarqube service
+  service:
+    name: sonarqube
+    state: started
+  

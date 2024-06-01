@@ -1,2 +1,3 @@
----
-# vars file for postgresql
+db_user: ddsonar
+db_name: ddsonarqube
+db_password: mwd#2%#!!#%rgs

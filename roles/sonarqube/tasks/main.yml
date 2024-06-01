@@ -6,25 +6,86 @@
 - name: Download Sonarqube zip file from given link
   get_url:
     url: "https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.0.0.68432.zip"
-    dest: "/home/ubuntu/sonarqube-10.0.0.68432.zip"
-
-# - name: create directory /opt/sonarqube/
-#   file:
-#     path: "/opt/sonarqube"
-#     state: directory
-
+    dest: "/home/bhavin/sonarqube-10.0.0.68432.zip"
 
 - name: Unzip SonarQube zip file
   unarchive:
-    src: "/home/ubuntu/sonarqube-10.0.0.68432.zip"
-    dest: "/home/ubuntu/" 
+    src: "/home/bhavin/sonarqube-10.0.0.68432.zip"
+    dest: "/home/bhavin/" 
     remote_src: yes
-    # creates: "/opt/sonarqube"
-    
   become: true
 
 - name: rename unzip file to sonarqube
-  shell: mv sonarqube-10.0.0.68432 sonarqube
+  # become: true
+  shell: mv sonarqube-10.0.0.68432/ sonarqube
  
 - name: mv sonarqube to /opt/sonarqube
+  become: true
   shell: mv sonarqube /opt/sonarqube
+
+
+- name: Create ddsonar group
+  group:
+    name: ddsonar
+    state: present
+
+- name: Create ddsonar user
+  user:
+    name: ddsonar
+    group: ddsonar
+    home: /opt/sonarqube
+    state: present
+
+- name: Change ownership of /opt/sonarqube recursively
+  file:
+    path: /opt/sonarqube
+    owner: ddsonar
+    group: ddsonar
+    recurse: yes
+
+- name: Edit the SonarQube configuration file sonar.properties
+  become: true
+  lineinfile:
+    dest: /opt/sonarqube/conf/sonar.properties
+    line: '{{ item }}'
+  with_items: 
+    - 'sonar.jdbc.username=ddsonar'
+    - 'sonar.jdbc.password=mwd#2%#!!#%rgs'
+    - 'sonar.jdbc.url=jdbc:postgresql://localhost:5432/ddsonarqube'
+
+- name:  Edit the sonar script file sonar.sh
+  lineinfile:
+    dest: /opt/sonarqube/bin/linux-x86-64/sonar.sh
+    line: RUN_AS_USER=ddsonar
+
+- name: Create a systemd service file to start SonarQube at system boot.
+  template:
+    src: sonar.service.j2
+    dest: /etc/systemd/system/sonar.service
+  notify: 
+    - Enable Sonarqube service
+    - Start Sonarqube service
+  
+- name: Edit the sysctl configuration file.
+  become: true
+  lineinfile:
+    dest: /etc/sysctl.conf
+    line: '{{ item}}'
+  with_items: 
+    - 'vm.max_map_count=262144'
+    - 'fs.file-max=65536'
+    - 'ulimit -n 65536'
+    - 'ulimit -u 4096'
+
+- name: Reboot system to load all config to setup sonarqube
+  shell: sudo reboot
+
+# - name: Connect to 9000 port to run SonarQube
+#   shell: curl http://localhost:9000
+
+# - name: Ensure your localhost is listioning to port 9000 to connect sonarqube
+#   command: telnet localhost 9000 | grep -i 'Connected to localhost'
+#   register: sonarqube
+
+# - debug:
+#     var: sonarqube

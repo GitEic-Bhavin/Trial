@@ -1,0 +1,30 @@
+---
+- name: Stop PostgreSQL Service
+  service:
+    name: postgresql
+    state: stopped
+    enabled: no
+
+- name: Remove PostgreSQL packages
+  apt:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - postgresql-contrib
+
+- name: Remove pip packages
+  pip:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - psycopg2-binary==2.9.9
+
+- name: Remove PostgreSQL repository
+  file:
+    path: /etc/apt/sources.list.d/pgdg.list
+    state: absent
+
+- name: Remove PostgreSQL key
+  apt_key:
+    id: "7FCC7D46ACCC4CF8"
+    state: absent
